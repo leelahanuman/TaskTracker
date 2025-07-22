@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import "./app.css";
 function App() {
   // Load tasks from localStorage initially
   const [tasks, setTasks] = useState(() => {
