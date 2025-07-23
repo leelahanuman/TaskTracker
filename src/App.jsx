@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-
 import "./app.css";
+
 function App() {
-  // Load tasks from localStorage initially
   const [tasks, setTasks] = useState(() => {
     const saved = localStorage.getItem("tasks");
     return saved ? JSON.parse(saved) : [];
@@ -10,60 +9,68 @@ function App() {
 
   const [input, setInput] = useState("");
 
-  // Update localStorage whenever tasks change
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  // Add a new task
   const addTask = () => {
     if (input.trim() === "") return;
     setTasks([...tasks, { text: input, completed: false }]);
-    setInput(""); // clear input
+    setInput("");
   };
 
-  // Toggle task completion
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      addTask();
+    }
+  };
+
   const toggleComplete = (index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks[index].completed = !updatedTasks[index].completed;
-    setTasks(updatedTasks);
+    const updated = [...tasks];
+    updated[index].completed = !updated[index].completed;
+    setTasks(updated);
   };
 
-  // Delete task
   const deleteTask = (index) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks);
+    const updated = tasks.filter((_, i) => i !== index);
+    setTasks(updated);
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
-      <h1>📝 TaskTrack</h1>
+    <div className="container">
+      <h1 className="title">📝 TaskTrack</h1>
 
-      <div>
+      <div className="input-group">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Enter a task..."
+          className="input"
         />
-        <button onClick={addTask}>Add</button>
+        <button onClick={addTask} className="add-btn">
+          Add
+        </button>
       </div>
 
-      <ul style={{ marginTop: "20px" }}>
+      <ul className="task-list">
         {tasks.map((task, index) => (
-          <li key={index} style={{ marginBottom: "10px" }}>
+          <li key={index} className="task-item">
             <span
               onClick={() => toggleComplete(index)}
-              style={{
-                textDecoration: task.completed ? "line-through" : "none",
-                cursor: "pointer",
+              className={`task-text ${task.completed ? "completed" : ""}`}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") toggleComplete(index);
               }}
             >
               {task.text}
             </span>
             <button
               onClick={() => deleteTask(index)}
-              style={{ marginLeft: "10px" }}
+              className="delete-btn"
+              aria-label={`Delete task: ${task.text}`}
             >
               ❌
             </button>
