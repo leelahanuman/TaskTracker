@@ -2,50 +2,69 @@
 
 body {
   font-family: "Segoe UI", sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f9fafb;
   margin: 0;
   padding: 20px;
+  color: #333;
 }
 
 .container {
-  max-width: 500px;
+  max-width: 550px;
   margin: auto;
-  background-color: #fff;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .title {
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #1e293b;
 }
 
 .input-group {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .input {
   flex: 1;
-  padding: 10px;
-  border: 2px solid #ddd;
-  border-radius: 6px;
+  padding: 12px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
   font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-color: #1e90ff;
+  background-color: #f0f8ff;
 }
 
 .add-btn {
-  padding: 10px 16px;
+  padding: 12px 18px;
   background-color: #1e90ff;
-  color: white;
+  color: #ffffff;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .add-btn:hover {
   background-color: #0d74d1;
+  transform: scale(1.03);
 }
 
 .task-list {
@@ -57,27 +76,31 @@ body {
 .task-item {
   display: flex;
   justify-content: space-between;
-  padding: 10px 14px;
-  border: 1px solid #e1e1e1;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  background-color: #fafafa;
-  transition: background-color 0.2s;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background-color: #f8fafc;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .task-item:hover {
-  background-color: #f0f8ff;
+  background-color: #ebf8ff;
+  transform: scale(1.01);
 }
 
 .task-text {
   flex: 1;
   cursor: pointer;
   outline: none;
+  font-size: 16px;
+  word-break: break-word;
 }
 
 .task-text.completed {
   text-decoration: line-through;
-  color: #888;
+  color: #94a3b8;
 }
 
 .delete-btn {
@@ -85,4 +108,10 @@ body {
   border: none;
   cursor: pointer;
   font-size: 18px;
+  color: #dc2626;
+  transition: color 0.2s ease;
+}
+
+.delete-btn:hover {
+  color: #b91c1c;
 }
